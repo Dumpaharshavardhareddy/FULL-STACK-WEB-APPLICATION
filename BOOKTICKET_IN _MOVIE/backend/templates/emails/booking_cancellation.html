@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Booking Cancelled</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #EF4444; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .cancellation { background: #fee; border: 1px solid #fcc; color: #c33; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .refund { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .footer { text-align: center; padding: 20px; color: #666; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 MovieBook</h1>
+            <h2>Booking Cancelled</h2>
+        </div>
+        
+        <div class="content">
+            <div class="cancellation">
+                <h3>❌ Your booking has been cancelled</h3>
+                <p>We're sorry to see you cancel your movie plans.</p>
+            </div>
+            
+            <p>Dear {{ user.first_name }},</p>
+            
+            <p>Your booking has been successfully cancelled as requested.</p>
+            
+            <h3>Cancelled Booking Details:</h3>
+            <ul>
+                <li><strong>Booking ID:</strong> {{ booking.booking_id }}</li>
+                <li><strong>Movie:</strong> {{ booking.movie_title }}</li>
+                <li><strong>Theater:</strong> {{ booking.theater_name }}</li>
+                <li><strong>Show Date:</strong> {{ booking.show.show_date }}</li>
+                <li><strong>Show Time:</strong> {{ booking.show.show_time }}</li>
+                <li><strong>Seats:</strong> {{ booking.quantity }} seats</li>
+                <li><strong>Original Amount:</strong> ₹{{ booking.final_amount }}</li>
+            </ul>
+            
+            {% if refund_amount > 0 %}
+            <div class="refund">
+                <h3>💰 Refund Information</h3>
+                <p><strong>Refund Amount:</strong> ₹{{ refund_amount }}</p>
+                <p>Your refund will be processed within 5-7 business days to your original payment method.</p>
+            </div>
+            {% endif %}
+            
+            <p>We hope to serve you again soon. Check out our latest movies and book your next show!</p>
+            
+            <p>Thank you for choosing MovieBook!</p>
+        </div>
+        
+        <div class="footer">
+            <p>For support, contact us at support@moviebook.com</p>
+            <p>&copy; 2024 MovieBook. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

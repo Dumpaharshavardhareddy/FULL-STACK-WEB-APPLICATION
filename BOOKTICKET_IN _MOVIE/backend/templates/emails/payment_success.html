@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Payment Successful - Ticket Confirmed</title>
+    <style>
+        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
+        .container { max-width: 600px; margin: 0 auto; padding: 20px; }
+        .header { background: #10B981; color: white; padding: 20px; text-align: center; }
+        .content { padding: 20px; background: #f9f9f9; }
+        .ticket { background: white; border: 2px dashed #ccc; padding: 20px; margin: 20px 0; }
+        .success { background: #d4edda; border: 1px solid #c3e6cb; color: #155724; padding: 15px; border-radius: 5px; margin: 20px 0; }
+        .footer { text-align: center; padding: 20px; color: #666; }
+        .qr-placeholder { text-align: center; padding: 20px; background: #f8f9fa; border: 1px solid #dee2e6; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🎬 MovieBook</h1>
+            <h2>Payment Successful!</h2>
+        </div>
+        
+        <div class="content">
+            <div class="success">
+                <h3>✅ Your payment has been processed successfully!</h3>
+                <p>Your tickets are now confirmed and ready for use.</p>
+            </div>
+            
+            <p>Dear {{ user.first_name }},</p>
+            
+            <p>Thank you for your payment. Your movie tickets have been confirmed!</p>
+            
+            <div class="ticket">
+                <h3>🎫 Your Movie Ticket</h3>
+                <h4>{{ movie.title }}</h4>
+                
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="flex: 1;">
+                        <p><strong>Booking ID:</strong> {{ booking.booking_id }}</p>
+                        <p><strong>Payment ID:</strong> {{ payment.payment_id }}</p>
+                        <p><strong>Theater:</strong> {{ theater.name }}</p>
+                        <p><strong>Address:</strong> {{ theater.full_address }}</p>
+                        <p><strong>Show Date:</strong> {{ show.show_date }}</p>
+                        <p><strong>Show Time:</strong> {{ show.show_time }}</p>
+                        <p><strong>Screen:</strong> {{ show.screen.name }}</p>
+                        <p><strong>Seats:</strong> 
+                            {% for seat in seats %}
+                                {{ seat.seat.seat_number }}{% if not forloop.last %}, {% endif %}
+                            {% endfor %}
+                        </p>
+                        <p><strong>Total Paid:</strong> ₹{{ booking.final_amount }}</p>
+                    </div>
+                    <div class="qr-placeholder">
+                        <p>📱 QR Code</p>
+                        <p style="font-size: 12px;">Scan at theater</p>
+                    </div>
+                </div>
+            </div>
+            
+            <p><strong>What's Next?</strong></p>
+            <ul>
+                <li>Save this email or take a screenshot of your ticket</li>
+                <li>Arrive at the theater 30 minutes before showtime</li>
+                <li>Show this ticket at the entrance for verification</li>
+                <li>Enjoy your movie! 🍿</li>
+            </ul>
+            
+            <p><strong>Cancellation Policy:</strong></p>
+            <p>You can cancel your booking up to 2 hours before the show time for a full refund.</p>
+            
+            <p>Thank you for choosing MovieBook!</p>
+        </div>
+        
+        <div class="footer">
+            <p>Need help? Contact us at support@moviebook.com</p>
+            <p>&copy; 2024 MovieBook. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

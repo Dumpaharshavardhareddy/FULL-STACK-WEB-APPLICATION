@@ -1,0 +1,37 @@
+MovieBook - Payment Successful!
+
+✅ Your payment has been processed successfully!
+Your tickets are now confirmed and ready for use.
+
+Dear {{ user.first_name }},
+
+Thank you for your payment. Your movie tickets have been confirmed!
+
+🎫 Your Movie Ticket
+===================
+Movie: {{ movie.title }}
+Booking ID: {{ booking.booking_id }}
+Payment ID: {{ payment.payment_id }}
+Theater: {{ theater.name }}
+Address: {{ theater.full_address }}
+Show Date: {{ show.show_date }}
+Show Time: {{ show.show_time }}
+Screen: {{ show.screen.name }}
+Seats: {% for seat in seats %}{{ seat.seat.seat_number }}{% if not forloop.last %}, {% endif %}{% endfor %}
+Total Paid: ₹{{ booking.final_amount }}
+
+What's Next?
+============
+- Save this email or take a screenshot of your ticket
+- Arrive at the theater 30 minutes before showtime
+- Show this ticket at the entrance for verification
+- Enjoy your movie! 🍿
+
+Cancellation Policy:
+===================
+You can cancel your booking up to 2 hours before the show time for a full refund.
+
+Thank you for choosing MovieBook!
+
+Need help? Contact us at support@moviebook.com
+© 2024 MovieBook. All rights reserved.

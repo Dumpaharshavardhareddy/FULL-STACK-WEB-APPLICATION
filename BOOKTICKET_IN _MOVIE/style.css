@@ -1,0 +1,684 @@
+:root {
+  --primary-color: #DC2626;
+  --secondary-color: #1E40AF;
+  --accent-color: #F59E0B;
+  --success-color: #10B981;
+  --warning-color: #F59E0B;
+  --error-color: #EF4444;
+  --text-primary: #1F2937;
+  --text-secondary: #6B7280;
+  --bg-light: #F9FAFB;
+  --bg-white: #FFFFFF;
+  --border-color: #E5E7EB;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --border-radius: 0.5rem;
+  --transition: all 0.3s ease;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  line-height: 1.6;
+  color: var(--text-primary);
+  background-color: var(--bg-white);
+}
+
+/* Navigation */
+.navbar {
+  background: linear-gradient(135deg, var(--primary-color), #B91C1C) !important;
+  box-shadow: var(--shadow-md);
+  padding: 1rem 0;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.search-container {
+  position: relative;
+}
+
+.search-input {
+  padding-left: 2.5rem;
+  border-radius: 25px;
+  border: none;
+  width: 300px;
+}
+
+.search-icon {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-secondary);
+}
+
+/* Main Content */
+.main-content {
+  margin-top: 80px;
+}
+
+/* Hero Section */
+.hero-section {
+  background: linear-gradient(135deg, #F3F4F6 0%, #E5E7EB 100%);
+  padding: 4rem 0;
+}
+
+.hero-title {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.hero-subtitle {
+  font-size: 1.25rem;
+  color: var(--text-secondary);
+  margin-bottom: 2rem;
+}
+
+.hero-filters {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-image img {
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-lg);
+}
+
+/* Section Titles */
+.section-title {
+  font-size: 2rem;
+  font-weight: 600;
+  margin-bottom: 2rem;
+  color: var(--text-primary);
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -0.5rem;
+  left: 0;
+  width: 60px;
+  height: 3px;
+  background: var(--primary-color);
+  border-radius: 2px;
+}
+
+/* Movie Cards */
+.movie-card {
+  background: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition);
+  overflow: hidden;
+  height: 100%;
+}
+
+.movie-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.movie-poster {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+}
+
+.movie-info {
+  padding: 1.5rem;
+}
+
+.movie-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
+
+.movie-genre {
+  color: var(--text-secondary);
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+
+.movie-rating {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.rating-stars {
+  color: var(--accent-color);
+  margin-right: 0.5rem;
+}
+
+.movie-languages {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.language-badge {
+  background: var(--primary-color);
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+}
+
+/* Theater Cards */
+.theater-card {
+  background: var(--bg-white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-sm);
+  padding: 1.5rem;
+  transition: var(--transition);
+}
+
+.theater-card:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.theater-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.theater-location {
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.theater-facilities {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.facility-badge {
+  background: var(--bg-light);
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+/* Seat Selection */
+.seat-map {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.screen {
+  background: var(--text-primary);
+  color: white;
+  text-align: center;
+  padding: 0.5rem;
+  border-radius: 0.25rem;
+  margin-bottom: 2rem;
+  font-weight: 600;
+}
+
+.seat-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  align-items: center;
+}
+
+.row-label {
+  width: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.seat {
+  width: 30px;
+  height: 30px;
+  border: 2px solid var(--border-color);
+  border-radius: 0.25rem;
+  background: var(--bg-white);
+  cursor: pointer;
+  transition: var(--transition);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+}
+
+.seat:hover {
+  border-color: var(--primary-color);
+}
+
+.seat.selected {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+.seat.occupied {
+  background: var(--text-secondary);
+  border-color: var(--text-secondary);
+  cursor: not-allowed;
+  color: white;
+}
+
+.seat-legend {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.legend-seat {
+  width: 20px;
+  height: 20px;
+  border-radius: 0.25rem;
+}
+
+.legend-available {
+  background: var(--bg-white);
+  border: 2px solid var(--border-color);
+}
+
+.legend-selected {
+  background: var(--primary-color);
+}
+
+.legend-occupied {
+  background: var(--text-secondary);
+}
+
+/* Showtime Selection */
+.showtime-card {
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 1.5rem;
+  margin-bottom: 1rem;
+  transition: var(--transition);
+}
+
+.showtime-card:hover {
+  border-color: var(--primary-color);
+}
+
+.theater-info {
+  display: flex;
+  justify-content: between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.theater-name-show {
+  font-weight: 600;
+  font-size: 1.1rem;
+}
+
+.theater-facilities-show {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.showtimes {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.showtime-btn {
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--border-color);
+  background: var(--bg-white);
+  border-radius: 0.25rem;
+  cursor: pointer;
+  transition: var(--transition);
+  font-weight: 500;
+}
+
+.showtime-btn:hover {
+  border-color: var(--primary-color);
+  background: var(--primary-color);
+  color: white;
+}
+
+.showtime-btn.selected {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  color: white;
+}
+
+/* Booking Summary */
+.booking-summary {
+  background: var(--bg-light);
+  padding: 1.5rem;
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.summary-total {
+  font-weight: 600;
+  font-size: 1.1rem;
+  border-top: 1px solid var(--border-color);
+  padding-top: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Ticket Details */
+.ticket-container {
+  background: var(--bg-white);
+  border: 2px dashed var(--border-color);
+  border-radius: var(--border-radius);
+  padding: 2rem;
+  margin: 1rem 0;
+}
+
+.ticket-header {
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.qr-code {
+  text-align: center;
+}
+
+.ticket-body {
+  margin-bottom: 1.5rem;
+}
+
+.ticket-info {
+  padding: 0.5rem 0;
+}
+
+.info-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.info-item.total {
+  border-top: 2px solid var(--border-color);
+  border-bottom: none;
+  font-weight: 600;
+  font-size: 1.1rem;
+  color: var(--primary-color);
+}
+
+.label {
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.value {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.ticket-footer {
+  border-top: 1px solid var(--border-color);
+  padding-top: 1rem;
+}
+
+/* Success Animation */
+.success-animation {
+  animation: bounceIn 0.6s ease-out;
+}
+
+@keyframes bounceIn {
+  0% {
+    transform: scale(0.3);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  70% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Booking History */
+.booking-card {
+  transition: var(--transition);
+}
+
+.booking-card:hover {
+  transform: translateY(-2px);
+}
+
+.booking-poster {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: var(--border-radius);
+}
+
+.booking-filters {
+  background: var(--bg-light);
+  padding: 1rem;
+  border-radius: var(--border-radius);
+  margin-bottom: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background: var(--primary-color);
+  border-color: var(--primary-color);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+  transition: var(--transition);
+}
+
+.btn-primary:hover {
+  background: #B91C1C;
+  border-color: #B91C1C;
+}
+
+.btn-secondary {
+  background: var(--secondary-color);
+  border-color: var(--secondary-color);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+}
+
+.btn-secondary:hover {
+  background: #1E3A8A;
+  border-color: #1E3A8A;
+}
+
+.btn-success {
+  background: var(--success-color);
+  border-color: var(--success-color);
+  border-radius: var(--border-radius);
+  font-weight: 500;
+}
+
+/* Forms */
+.form-control {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+  transition: var(--transition);
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 0.2rem rgba(220, 38, 38, 0.25);
+}
+
+.form-select {
+  border-radius: var(--border-radius);
+  border: 1px solid var(--border-color);
+  padding: 0.75rem;
+}
+
+/* Modal Customizations */
+.modal-content {
+  border-radius: var(--border-radius);
+  border: none;
+  box-shadow: var(--shadow-lg);
+}
+
+.modal-header {
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  border-top: 1px solid var(--border-color);
+  padding: 1.5rem;
+}
+
+/* Footer */
+footer {
+  background: var(--text-primary) !important;
+}
+
+.social-links a {
+  font-size: 1.5rem;
+  transition: var(--transition);
+}
+
+.social-links a:hover {
+  color: var(--primary-color) !important;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-title {
+    font-size: 2rem;
+  }
+  
+  .hero-filters {
+    flex-direction: column;
+  }
+  
+  .search-input {
+    width: 200px;
+  }
+  
+  .seat-row {
+    gap: 0.25rem;
+  }
+  
+  .seat {
+    width: 25px;
+    height: 25px;
+    font-size: 0.625rem;
+  }
+  
+  .showtimes {
+    flex-direction: column;
+  }
+  
+  .theater-info {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+  .ticket-container {
+    padding: 1rem;
+  }
+  
+  .info-item {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .hero-section {
+    padding: 2rem 0;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+  }
+  
+  .movie-card {
+    margin-bottom: 1rem;
+  }
+  
+  .seat-legend {
+    gap: 1rem;
+  }
+  
+  .booking-poster {
+    height: 100px;
+  }
+}
+
+/* Loading Animation */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.loading::after {
+  content: '';
+  width: 40px;
+  height: 40px;
+  border: 4px solid var(--border-color);
+  border-top: 4px solid var(--primary-color);
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Utilities */
+.text-primary-custom {
+  color: var(--primary-color) !important;
+}
+
+.bg-primary-custom {
+  background-color: var(--primary-color) !important;
+}
+
+.border-primary-custom {
+  border-color: var(--primary-color) !important;
+}

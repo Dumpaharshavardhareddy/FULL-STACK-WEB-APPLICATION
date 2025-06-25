@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieBook - Book Your Favorite Movies</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="./style.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container">
+            <a class="navbar-brand fw-bold" href="#"><i class="fas fa-film me-2"></i>MovieBook</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                            <i class="fas fa-map-marker-alt me-1"></i>Mumbai
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#" onclick="changeLocation('Mumbai')">Mumbai</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLocation('Delhi')">Delhi</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLocation('Bangalore')">Bangalore</a></li>
+                            <li><a class="dropdown-item" href="#" onclick="changeLocation('Chennai')">Chennai</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#movies">Movies</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#theaters">Theaters</a>
+                    </li>
+                </ul>
+                <div class="d-flex align-items-center">
+                    <div class="search-container me-3">
+                        <input type="text" class="form-control search-input" placeholder="Search for movies, theaters..." id="searchInput">
+                        <i class="fas fa-search search-icon"></i>
+                    </div>
+                    <div class="user-actions">
+                        <button class="btn btn-outline-light me-2" onclick="showLogin()">
+                            <i class="fas fa-sign-in-alt me-1"></i>Sign In
+                        </button>
+                        <button class="btn btn-light" onclick="showRegister()">
+                            <i class="fas fa-user-plus me-1"></i>Sign Up
+                        </button>
+                        <div class="user-menu d-none">
+                            <div class="dropdown">
+                                <button class="btn btn-light dropdown-toggle" type="button" data-bs-toggle="dropdown">
+                                    <i class="fas fa-user me-1"></i><span id="userName">User</span>
+                                </button>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#" onclick="showProfile()"><i class="fas fa-user me-2"></i>Profile</a></li>
+                                    <li><a class="dropdown-item" href="#" onclick="showBookings()"><i class="fas fa-ticket-alt me-2"></i>My Bookings</a></li>
+                                    <li><hr class="dropdown-divider"></li>
+                                    <li><a class="dropdown-item" href="#" onclick="logout()"><i class="fas fa-sign-out-alt me-2"></i>Logout</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6">
+                        <h1 class="hero-title">Book Your Favorite Movies</h1>
+                        <p class="hero-subtitle">Discover and book tickets for the latest movies in your city</p>
+                        <div class="hero-filters">
+                            <select class="form-select me-2" id="genreFilter">
+                                <option value="">All Genres</option>
+                                <option value="action">Action</option>
+                                <option value="comedy">Comedy</option>
+                                <option value="drama">Drama</option>
+                                <option value="thriller">Thriller</option>
+                                <option value="romance">Romance</option>
+                            </select>
+                            <select class="form-select me-2" id="languageFilter">
+                                <option value="">All Languages</option>
+                                <option value="hindi">Hindi</option>
+                                <option value="english">English</option>
+                                <option value="tamil">Tamil</option>
+                                <option value="telugu">Telugu</option>
+                            </select>
+                            <button class="btn btn-secondary" onclick="applyFilters()">
+                                <i class="fas fa-filter me-1"></i>Filter
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-image">
+                            <img src="https://images.pexels.com/photos/7991579/pexels-photo-7991579.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Cinema" class="img-fluid rounded">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Movies Section -->
+        <section id="movies" class="py-5">
+            <div class="container">
+                <h2 class="section-title">Now Showing</h2>
+                <div class="row" id="moviesContainer">
+                    <!-- Movies will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Theaters Section -->
+        <section id="theaters" class="py-5 bg-light">
+            <div class="container">
+                <h2 class="section-title">Popular Theaters</h2>
+                <div class="row" id="theatersContainer">
+                    <!-- Theaters will be loaded here -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Booking History Section -->
+        <section id="bookingHistory" class="py-5 d-none">
+            <div class="container">
+                <h2 class="section-title">My Bookings</h2>
+                <div class="row" id="bookingHistoryContainer">
+                    <!-- Booking history will be loaded here -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Movie Details Modal -->
+    <div class="modal fade" id="movieModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="movieModalTitle">Movie Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="movieModalBody">
+                    <!-- Movie details will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Theater Selection Modal -->
+    <div class="modal fade" id="theaterModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Select Theater & Showtime</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="theaterModalBody">
+                    <!-- Theater selection will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Seat Selection Modal -->
+    <div class="modal fade" id="seatModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Select Seats</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body" id="seatModalBody">
+                    <!-- Seat selection will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <div class="seat-summary">
+                        <span>Selected Seats: <span id="selectedSeats">None</span></span>
+                        <span>Total Amount: ₹<span id="totalAmount">0</span></span>
+                    </div>
+                    <button type="button" class="btn btn-primary" onclick="proceedToPayment()" disabled id="proceedBtn">
+                        Proceed to Payment
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Login Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="loginEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Sign In</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Don't have an account? <a href="#" onclick="showRegister()">Sign up</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Register Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Sign Up</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPhone" class="form-label">Phone Number</label>
+                            <input type="tel" class="form-control" id="registerPhone" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <input type="password" class="form-control" id="confirmPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100">Sign Up</button>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="#" onclick="showLogin()">Sign in</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="modal fade" id="paymentModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Payment</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="booking-summary mb-4">
+                        <h6>Booking Summary</h6>
+                        <div id="bookingSummary"></div>
+                    </div>
+                    <form id="paymentForm">
+                        <div class="mb-3">
+                            <label class="form-label">Payment Method</label>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="creditCard" value="credit" checked>
+                                <label class="form-check-label" for="creditCard">
+                                    <i class="fas fa-credit-card me-2"></i>Credit/Debit Card
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="upi" value="upi">
+                                <label class="form-check-label" for="upi">
+                                    <i class="fas fa-mobile-alt me-2"></i>UPI
+                                </label>
+                            </div>
+                        </div>
+                        <div id="cardDetails">
+                            <div class="mb-3">
+                                <label for="cardNumber" class="form-label">Card Number</label>
+                                <input type="text" class="form-control" id="cardNumber" placeholder="1234 5678 9012 3456">
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-3">
+                                    <label for="expiryDate" class="form-label">Expiry Date</label>
+                                    <input type="text" class="form-control" id="expiryDate" placeholder="MM/YY">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="cvv" class="form-label">CVV</label>
+                                    <input type="text" class="form-control" id="cvv" placeholder="123">
+                                </div>
+                            </div>
+                        </div>
+                        <div id="upiDetails" class="d-none">
+                            <div class="mb-3">
+                                <label for="upiId" class="form-label">UPI ID</label>
+                                <input type="text" class="form-control" id="upiId" placeholder="user@paytm">
+                            </div>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100">
+                            <i class="fas fa-lock me-2"></i>Pay Securely
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking Success Modal -->
+    <div class="modal fade" id="bookingSuccessModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header bg-success text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-check-circle me-2"></i>Ticket Booked Successfully!
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <div class="success-animation">
+                            <i class="fas fa-check-circle text-success" style="font-size: 4rem;"></i>
+                        </div>
+                        <h4 class="text-success mt-3">Payment Successful!</h4>
+                        <p class="text-muted">Your tickets have been booked successfully</p>
+                    </div>
+                    
+                    <div class="ticket-details" id="ticketDetails">
+                        <!-- Ticket details will be populated here -->
+                    </div>
+                    
+                    <div class="text-center mt-4">
+                        <button class="btn btn-primary me-2" onclick="downloadTicket()">
+                            <i class="fas fa-download me-2"></i>Download Ticket
+                        </button>
+                        <button class="btn btn-outline-primary me-2" onclick="shareTicket()">
+                            <i class="fas fa-share me-2"></i>Share
+                        </button>
+                        <button class="btn btn-outline-secondary" onclick="viewBookings()">
+                            <i class="fas fa-list me-2"></i>View All Bookings
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Booking History Modal -->
+    <div class="modal fade" id="bookingHistoryModal" tabindex="-1">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        <i class="fas fa-ticket-alt me-2"></i>My Bookings
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="booking-filters mb-4">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <select class="form-select" id="statusFilter">
+                                    <option value="">All Bookings</option>
+                                    <option value="confirmed">Confirmed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                    <option value="completed">Completed</option>
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <input type="date" class="form-control" id="dateFilter">
+                            </div>
+                            <div class="col-md-4">
+                                <button class="btn btn-outline-primary" onclick="filterBookings()">
+                                    <i class="fas fa-filter me-1"></i>Filter
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="bookingHistoryList">
+                        <!-- Booking history will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4 mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4">
+                    <h5><i class="fas fa-film me-2"></i>MovieBook</h5>
+                    <p>Your favorite movie booking platform</p>
+                </div>
+                <div class="col-md-4">
+                    <h6>Quick Links</h6>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-light">About Us</a></li>
+                        <li><a href="#" class="text-light">Terms & Conditions</a></li>
+                        <li><a href="#" class="text-light">Privacy Policy</a></li>
+                        <li><a href="#" class="text-light">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h6>Follow Us</h6>
+                    <div class="social-links">
+                        <a href="#" class="text-light me-3"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-light me-3"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-light"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-3">
+            <div class="text-center">
+                <p>&copy; 2024 MovieBook. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./main.js"></script>
+</body>
+</html>

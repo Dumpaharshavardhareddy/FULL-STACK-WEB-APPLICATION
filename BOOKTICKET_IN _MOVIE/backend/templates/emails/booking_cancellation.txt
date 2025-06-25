@@ -1,0 +1,32 @@
+MovieBook - Booking Cancelled
+
+❌ Your booking has been cancelled
+We're sorry to see you cancel your movie plans.
+
+Dear {{ user.first_name }},
+
+Your booking has been successfully cancelled as requested.
+
+Cancelled Booking Details:
+==========================
+Booking ID: {{ booking.booking_id }}
+Movie: {{ booking.movie_title }}
+Theater: {{ booking.theater_name }}
+Show Date: {{ booking.show.show_date }}
+Show Time: {{ booking.show.show_time }}
+Seats: {{ booking.quantity }} seats
+Original Amount: ₹{{ booking.final_amount }}
+
+{% if refund_amount > 0 %}
+💰 Refund Information
+====================
+Refund Amount: ₹{{ refund_amount }}
+Your refund will be processed within 5-7 business days to your original payment method.
+{% endif %}
+
+We hope to serve you again soon. Check out our latest movies and book your next show!
+
+Thank you for choosing MovieBook!
+
+For support, contact us at support@moviebook.com
+© 2024 MovieBook. All rights reserved.
